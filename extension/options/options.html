@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SilverAssist - Accessibility & Caregiver Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="settings-container">
+    <header class="settings-header">
+      <div class="header-content">
+        <span class="header-icon">🌟</span>
+        <div>
+          <h1>SilverAssist AI Settings</h1>
+          <p>Personalize reading comfort, speech speed, and assistance levels for you or your family member.</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="settings-main">
+      <!-- Profile Presets -->
+      <section class="settings-card">
+        <h2>👤 One-Click Accessibility Profiles</h2>
+        <p class="section-desc">Select a preset designed specifically for common vision and cognitive needs.</p>
+
+        <div class="preset-grid">
+          <div class="preset-box active" data-preset="senior">
+            <div class="preset-icon">👵</div>
+            <h3>Senior Easy Mode</h3>
+            <p>150% text size, warm contrast, plain English translations for jargon, slow audio instructions.</p>
+          </div>
+
+          <div class="preset-box" data-preset="low-vision">
+            <div class="preset-icon">👓</div>
+            <h3>Low Vision / Cataracts</h3>
+            <p>Yellow-on-black high contrast, automatic screen narration on hover, enlarged yellow cursor.</p>
+          </div>
+
+          <div class="preset-box" data-preset="dyslexia">
+            <div class="preset-icon">📖</div>
+            <h3>Dyslexia & Clarity</h3>
+            <p>Weighted typography, reading ruler guide bar, generous letter spacing to prevent line skipping.</p>
+          </div>
+
+          <div class="preset-box" data-preset="novice">
+            <div class="preset-icon">🌱</div>
+            <h3>Digital Beginner</h3>
+            <p>Step-by-step form walkthroughs, scam & dark pattern warnings, no confusing technical terms.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Speech & Audio Settings -->
+      <section class="settings-card">
+        <h2>🔊 Voice & Speech Settings</h2>
+
+        <div class="form-group">
+          <label for="speech-rate">Reading Speed (Cadence)</label>
+          <div class="slider-row">
+            <input type="range" id="speech-rate" min="0.6" max="1.2" step="0.05" value="0.85">
+            <span id="rate-value" class="slider-val">0.85x (Calm & Clear)</span>
+          </div>
+          <small>Slower speeds are proven to reduce anxiety and improve comprehension for seniors.</small>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-row">
+            <input type="checkbox" id="auto-speak" checked>
+            <span>Automatically read each question out loud during Step-by-Step form filling</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-row">
+            <input type="checkbox" id="audio-chimes" checked>
+            <span>Play gentle audio chimes upon completing form steps</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Visual Comfort Settings -->
+      <section class="settings-card">
+        <h2>👁️ Visual Legibility</h2>
+
+        <div class="form-group">
+          <label for="font-size">Default Text Magnification</label>
+          <select id="font-size">
+            <option value="100">Standard Size (100%)</option>
+            <option value="130">Large (130%)</option>
+            <option value="150" selected>Extra Large (150% - Recommended for Seniors)</option>
+            <option value="175">Jumbo (175%)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-row">
+            <input type="checkbox" id="show-reading-ruler">
+            <span>Enable horizontal Reading Ruler bar that follows cursor</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-row">
+            <input type="checkbox" id="scam-shield" checked>
+            <span>Detect deceptive dark patterns (pre-checked boxes, fake timers, unencrypted forms)</span>
+          </label>
+        </div>
+      </section>
+
+      <div class="save-actions">
+        <button id="btn-save" class="btn-primary">Save All Preferences</button>
+        <span id="save-status" class="save-toast">Preferences saved!</span>
+      </div>
+    </main>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

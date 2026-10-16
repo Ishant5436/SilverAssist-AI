@@ -1,0 +1,474 @@
+/* ==========================================================================
+   SilverAssist AI - Assistive Injected Styles
+   Designed for WCAG 2.2 AAA accessibility, high legibility, and elderly comfort
+   ========================================================================== */
+
+/* --- High Contrast & Accessibility Theme Classes applied to body --- */
+
+body.silver-theme-high-contrast {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+
+body.silver-theme-high-contrast * {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+body.silver-theme-high-contrast a,
+body.silver-theme-high-contrast button {
+  color: #00ffff !important;
+  text-decoration: underline !important;
+  font-weight: bold !important;
+}
+
+body.silver-theme-sepia {
+  background-color: #fcf6e8 !important;
+  color: #2b251f !important;
+}
+
+body.silver-theme-sepia * {
+  background-color: transparent !important;
+  color: #2b251f !important;
+  border-color: #d1b894 !important;
+}
+
+body.silver-font-dyslexic * {
+  font-family: 'Comic Sans MS', 'Verdana', 'Trebuchet MS', sans-serif !important;
+  letter-spacing: 0.08em !important;
+  word-spacing: 0.16em !important;
+  line-height: 1.8 !important;
+}
+
+body.silver-zoom-130 {
+  font-size: 130% !important;
+}
+body.silver-zoom-150 {
+  font-size: 150% !important;
+}
+body.silver-zoom-175 {
+  font-size: 175% !important;
+}
+
+/* Big Cursor & Focus Spotlight */
+body.silver-big-cursor,
+body.silver-big-cursor * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="%23facc15" stroke="%23000" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>'), auto !important;
+}
+
+#silver-reading-ruler {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  height: 48px;
+  background: rgba(254, 240, 138, 0.28);
+  border-top: 2px solid #ca8a04;
+  border-bottom: 2px solid #ca8a04;
+  pointer-events: none;
+  z-index: 2147483640;
+  display: none;
+  box-shadow: 0 0 16px rgba(234, 179, 8, 0.35);
+  transition: top 0.05s ease-out;
+}
+
+/* Pulsating highlight around active target form element on the real webpage */
+.silver-field-highlight {
+  outline: 5px solid #2563eb !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 24px rgba(37, 99, 235, 0.8) !important;
+  border-radius: 6px !important;
+  animation: silver-pulse 1.5s infinite alternate ease-in-out !important;
+  transition: all 0.3s ease !important;
+}
+
+@keyframes silver-pulse {
+  0% { outline-color: #2563eb; box-shadow: 0 0 15px rgba(37, 99, 235, 0.7); }
+  100% { outline-color: #f59e0b; box-shadow: 0 0 30px rgba(245, 158, 11, 0.9); }
+}
+
+/* --- Floating Assistant Launcher Button --- */
+
+#silver-assist-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2147483645;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  border: 3px solid #60a5fa;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+}
+
+#silver-assist-launcher:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px -5px rgba(30, 58, 138, 0.7);
+  background: linear-gradient(135deg, #172554 0%, #1d4ed8 100%);
+}
+
+#silver-assist-launcher .silver-badge {
+  background: #facc15;
+  color: #0f172a;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* --- Main SilverAssist Control Center Drawer / Dialog --- */
+
+#silver-assist-hub-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 2147483646;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+#silver-assist-hub-modal {
+  width: 92%;
+  max-width: 640px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 4px solid #1e3a8a;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #0f172a;
+  animation: silver-pop-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes silver-pop-in {
+  from { opacity: 0; transform: scale(0.92) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.silver-hub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 16px;
+}
+
+.silver-hub-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #1e3a8a;
+}
+
+.silver-close-btn {
+  background: #f1f5f9;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #334155;
+  transition: all 0.2s;
+}
+
+.silver-close-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #ef4444;
+}
+
+/* Quick Action Grid with Large Friendly Touch Targets */
+.silver-action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.silver-card-btn {
+  background: #f8fafc;
+  border: 3px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  text-align: left;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.silver-card-btn:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.15);
+}
+
+.silver-card-btn.active {
+  background: #dbeafe;
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 2px #1d4ed8;
+}
+
+.silver-card-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.silver-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.silver-card-desc {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+/* --- Step-by-Step Form Wizard Modal --- */
+
+#silver-wizard-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 2147483647;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+#silver-wizard-modal {
+  width: 95%;
+  max-width: 720px;
+  background: #ffffff;
+  border-radius: 28px;
+  border: 5px solid #2563eb;
+  padding: 32px;
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: silver-pop-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.silver-wizard-progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.silver-wizard-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+  width: 20%;
+  transition: width 0.3s ease;
+}
+
+.silver-wizard-step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 800;
+  color: #1e3a8a;
+  background: #dbeafe;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  width: fit-content;
+}
+
+.silver-wizard-field-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.silver-wizard-explainer-box {
+  background: #f0fdf4;
+  border: 2px dashed #22c55e;
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.silver-wizard-explainer-box.warning-tip {
+  background: #fffbeb;
+  border-color: #f59e0b;
+}
+
+.silver-wizard-explainer-text {
+  font-size: 17px;
+  color: #166534;
+  line-height: 1.5;
+}
+
+.silver-wizard-explainer-text strong {
+  display: block;
+  font-size: 18px;
+  color: #14532d;
+  margin-bottom: 4px;
+}
+
+/* Big Input Box in Wizard */
+.silver-wizard-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.silver-wizard-input {
+  width: 100%;
+  padding: 18px 24px;
+  font-size: 24px;
+  font-weight: 600;
+  border: 4px solid #94a3b8;
+  border-radius: 16px;
+  color: #0f172a;
+  background: #ffffff;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.silver-wizard-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+}
+
+.silver-wizard-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.silver-btn-voice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f5f9;
+  border: 2px solid #94a3b8;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #1e293b;
+  transition: all 0.2s;
+}
+
+.silver-btn-voice:hover {
+  background: #e2e8f0;
+  border-color: #475569;
+}
+
+.silver-btn-voice.recording {
+  background: #fee2e2;
+  border-color: #ef4444;
+  color: #dc2626;
+  animation: silver-pulse 1s infinite alternate;
+}
+
+.silver-nav-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.silver-btn-nav {
+  padding: 14px 28px;
+  font-size: 19px;
+  font-weight: 800;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.silver-btn-prev {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.silver-btn-prev:hover {
+  background: #cbd5e1;
+}
+
+.silver-btn-next {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+.silver-btn-next:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.silver-btn-finish {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+}
+
+.silver-btn-finish:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+/* Security & Dark Pattern Banner */
+.silver-safety-banner {
+  background: #fff1f2;
+  border: 2px solid #f43f5e;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 16px;
+  color: #9f1239;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

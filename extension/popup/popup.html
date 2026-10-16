@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SilverAssist Accessibility Control</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <span class="brand-icon">🌟</span>
+        <div>
+          <h1>SilverAssist AI</h1>
+          <p class="brand-tag">Web & Form Accessibility</p>
+        </div>
+      </div>
+      <span class="active-badge" id="fields-badge">Detecting...</span>
+    </header>
+
+    <!-- Page Status Card -->
+    <div class="status-card" id="status-card">
+      <div class="status-icon">📝</div>
+      <div class="status-info">
+        <h3 id="form-status-title">Scanning page...</h3>
+        <p id="form-status-desc">SilverAssist is checking this webpage for forms.</p>
+      </div>
+    </div>
+
+    <!-- Quick Action Launchers -->
+    <div class="action-buttons">
+      <button class="primary-action-btn" id="btn-start-wizard">
+        <span class="btn-icon">⚡</span>
+        <div class="btn-text">
+          <strong>Start Step-by-Step Form Helper</strong>
+          <small>Fill this page's form one simple question at a time</small>
+        </div>
+      </button>
+
+      <button class="secondary-action-btn" id="btn-read-aloud">
+        <span class="btn-icon">🔊</span>
+        <div class="btn-text">
+          <strong>Read Webpage Out Loud</strong>
+          <small>Clear, natural speech at comfortable senior speed</small>
+        </div>
+      </button>
+    </div>
+
+    <!-- Accessibility Quick Toggles -->
+    <div class="toggles-section">
+      <h2>Visual Comfort & Reading</h2>
+
+      <div class="toggle-row">
+        <div class="toggle-label">
+          <strong>Senior Large-Print (150%)</strong>
+          <small>Magnifies text and spacing</small>
+        </div>
+        <button class="switch-btn" id="toggle-zoom" aria-pressed="false">OFF</button>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">
+          <strong>High Contrast (Yellow / Black)</strong>
+          <small>Cataract & low-vision optimized</small>
+        </div>
+        <button class="switch-btn" id="toggle-contrast" aria-pressed="false">OFF</button>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-label">
+          <strong>Reading Ruler & Big Pointer</strong>
+          <small>Helps keep track of lines</small>
+        </div>
+        <button class="switch-btn" id="toggle-ruler" aria-pressed="false">OFF</button>
+      </div>
+    </div>
+
+    <!-- Footer links -->
+    <footer class="popup-footer">
+      <button class="footer-link-btn" id="btn-open-training">
+        <span>🎓 Open Form Practice Arena</span>
+      </button>
+      <div class="shortcut-hint">Shortcut: <strong>Alt + Shift + S</strong></div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

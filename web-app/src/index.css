@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --font-sans: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* High Contrast mode for entire web app */
+body.app-high-contrast {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+}
+body.app-high-contrast * {
+  border-color: #ffff00 !important;
+}
+body.app-high-contrast .bg-white,
+body.app-high-contrast .bg-slate-50,
+body.app-high-contrast .bg-slate-100 {
+  background-color: #111111 !important;
+  color: #ffff00 !important;
+}
+body.app-high-contrast button {
+  border-color: #ffff00 !important;
+  color: #ffff00 !important;
+}
+body.app-high-contrast input {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+/* Sepia Warm mode */
+body.app-sepia {
+  background-color: #fbf5e8 !important;
+  color: #2d261e !important;
+}
+body.app-sepia .bg-white,
+body.app-sepia .bg-slate-50 {
+  background-color: #fffdf7 !important;
+  color: #2d261e !important;
+}
+
+/* Large Font scaling */
+body.app-font-large {
+  font-size: 118%;
+}
+body.app-font-xlarge {
+  font-size: 135%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}

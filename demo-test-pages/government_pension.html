@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State Department of Social Services - Senior Pension & Energy Assistance</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 25px;
+      color: #222;
+      font-size: 14px;
+    }
+    .gov-banner {
+      background: #1b365d;
+      color: white;
+      padding: 12px 20px;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 3px solid #c99700;
+    }
+    .form-wrapper {
+      max-width: 820px;
+      margin: 20px auto;
+      background: #ffffff;
+      padding: 30px;
+      border: 2px solid #555;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+    }
+    h1 {
+      font-size: 20px;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      color: #111;
+    }
+    .sub-head {
+      text-align: center;
+      font-size: 12px;
+      font-style: italic;
+      margin-bottom: 25px;
+      color: #555;
+    }
+    fieldset {
+      border: 1px solid #777;
+      margin-bottom: 20px;
+      padding: 15px;
+    }
+    legend {
+      font-weight: bold;
+      font-size: 13px;
+      padding: 0 6px;
+      color: #1b365d;
+      font-family: Arial, sans-serif;
+    }
+    .field-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 12px;
+      font-family: Arial, sans-serif;
+    }
+    .field-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 3px;
+      color: #333;
+    }
+    input, select {
+      padding: 6px 8px;
+      border: 1px solid #666;
+      font-size: 13px;
+    }
+    .fine-print {
+      font-size: 10px;
+      color: #555;
+      line-height: 1.4;
+      margin-top: 15px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+    .btn-submit {
+      background: #1b365d;
+      color: white;
+      padding: 10px 25px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      border: 1px solid #000;
+      margin-top: 15px;
+      font-family: Arial, sans-serif;
+    }
+    .btn-submit:hover {
+      background: #0d1e35;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gov-banner">
+    <span>OFFICIAL GOVERNMENT PORTAL • FORM SSA-714-X</span>
+    <span>SECURITY LEVEL: RESTRICTED</span>
+  </div>
+
+  <div class="form-wrapper">
+    <h1>Application for Senior Supplemental Energy & Annuity Grant</h1>
+    <div class="sub-head">OMB No. 0960-0012 • State Fiscal Year 2026-2027</div>
+
+    <form id="pension-app" onsubmit="event.preventDefault(); alert('Application submitted to State Registry.');">
+      
+      <fieldset>
+        <legend>Part I: Primary Claimant Identity</legend>
+        <div class="field-row">
+          <div class="field-group" style="flex: 2;">
+            <label for="claimant-name">Claimant Full Legal Name</label>
+            <input type="text" id="claimant-name" name="claimant_name" placeholder="First Name, Middle, Last" required>
+          </div>
+          <div class="field-group">
+            <label for="claimant-dob">Date of Birth</label>
+            <input type="date" id="claimant-dob" name="claimant_dob" required>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="claimant-ssn">Social Security Number / National ID (SSN)</label>
+            <input type="text" id="claimant-ssn" name="claimant_ssn" placeholder="XXX-XX-XXXX" required>
+          </div>
+          <div class="field-group">
+            <label for="claimant-phone">Primary Contact Telephone</label>
+            <input type="tel" id="claimant-phone" name="claimant_phone" placeholder="(555) 000-0000" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Part II: Residential Domicile</legend>
+        <div class="field-row">
+          <div class="field-group" style="flex: 2;">
+            <label for="claimant-street">Domicile Street Address</label>
+            <input type="text" id="claimant-street" name="claimant_street" placeholder="Street and Suite/Apt Number" required>
+          </div>
+          <div class="field-group">
+            <label for="claimant-zip">Postal / Billing ZIP Code</label>
+            <input type="text" id="claimant-zip" name="claimant_zip" placeholder="5-digit ZIP" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Part III: Direct Deposit Banking Telemetry</legend>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="routing-aba">Bank 9-Digit Routing Number (ABA)</label>
+            <input type="text" id="routing-aba" name="routing_aba" placeholder="9 digits at bottom of check" required>
+          </div>
+          <div class="field-group">
+            <label for="acct-number">Bank Account Number</label>
+            <input type="text" id="acct-number" name="acct_number" placeholder="Checking account number" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="beneficiary-name">Designated Benefit Beneficiary / Nominee</label>
+            <input type="text" id="beneficiary-name" name="beneficiary_name" placeholder="Full name of spouse or adult child">
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="fine-print">
+        <strong>Statutory Declaration:</strong> False or fraudulent representations may incur criminal liability under 18 U.S.C. § 1001. By executing this submission, the claimant certifies that all household income brackets reported are accurate and subject to state tax audit.
+      </div>
+
+      <div style="margin-top: 15px; font-family: Arial, sans-serif; font-size: 12px;">
+        <label style="display: flex; align-items: center; gap: 8px;">
+          <input type="checkbox" id="statutory-certify" required>
+          I hereby swear and certify that all declarations contained herein are true and correct.
+        </label>
+      </div>
+
+      <button type="submit" class="btn-submit">Submit Official Claim for Review</button>
+    </form>
+  </div>
+
+</body>
+</html>
