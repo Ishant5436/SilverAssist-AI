@@ -97,23 +97,21 @@ body {
 }
 
 .primary-action-btn {
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  background: #1d4ed8;
   color: #ffffff;
   border: none;
-  border-radius: 12px;
-  padding: 14px;
+  border-radius: 10px;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
   text-align: left;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-  transition: all 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 .primary-action-btn:hover {
-  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%);
-  transform: translateY(-1px);
+  background: #1e40af;
 }
 
 .secondary-action-btn {

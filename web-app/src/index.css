@@ -1,11 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --font-sans: 'Lexend', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Public Sans', system-ui, -apple-system, sans-serif;
+  --bg-page: #f8fafc;
+  --text-main: #0f172a;
 }
 
-/* High Contrast mode for entire web app */
+/* High Contrast Low-Vision Mode */
 body.app-high-contrast {
   background-color: #000000 !important;
   color: #ffff00 !important;
@@ -13,15 +15,18 @@ body.app-high-contrast {
 body.app-high-contrast * {
   border-color: #ffff00 !important;
 }
-body.app-high-contrast .bg-white,
-body.app-high-contrast .bg-slate-50,
-body.app-high-contrast .bg-slate-100 {
-  background-color: #111111 !important;
+body.app-high-contrast .clean-card,
+body.app-high-contrast .clean-box,
+body.app-high-contrast header,
+body.app-high-contrast footer {
+  background-color: #000000 !important;
   color: #ffff00 !important;
+  border-color: #ffff00 !important;
 }
 body.app-high-contrast button {
-  border-color: #ffff00 !important;
+  background-color: #000000 !important;
   color: #ffff00 !important;
+  border-color: #ffff00 !important;
 }
 body.app-high-contrast input {
   background-color: #000000 !important;
@@ -29,23 +34,12 @@ body.app-high-contrast input {
   border-color: #ffff00 !important;
 }
 
-/* Sepia Warm mode */
-body.app-sepia {
-  background-color: #fbf5e8 !important;
-  color: #2d261e !important;
-}
-body.app-sepia .bg-white,
-body.app-sepia .bg-slate-50 {
-  background-color: #fffdf7 !important;
-  color: #2d261e !important;
-}
-
 /* Large Font scaling */
 body.app-font-large {
-  font-size: 118%;
+  font-size: 115%;
 }
 body.app-font-xlarge {
-  font-size: 135%;
+  font-size: 130%;
 }
 
 * {
@@ -54,6 +48,8 @@ body.app-font-xlarge {
 
 body {
   font-family: var(--font-sans);
+  background-color: #f8fafc;
+  color: #0f172a;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -61,13 +57,15 @@ body {
 button {
   font-family: inherit;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 input, select, textarea {
   font-family: inherit;
 }
 
+/* Clear, thick focus outline for accessibility */
 :focus-visible {
-  outline: 3px solid #2563eb;
+  outline: 4px solid #1d4ed8;
   outline-offset: 3px;
 }
