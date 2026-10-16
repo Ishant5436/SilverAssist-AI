@@ -11,21 +11,24 @@ window.SilverExplainer = (function () {
       title: 'Card Security Code (CVV)',
       explanation: 'Turn your card over. Look for the 3 small digits on the signature strip (or 4 digits on the front for Amex). This proves you hold the card in your hand.',
       tip: 'Never share this code over the phone or email.',
-      icon: '💳'
+      icon: '💳',
+      visualHint: 'card-cvv'
     },
     {
       keywords: ['routing number', 'aba', 'transit number', 'sort code'],
       title: 'Bank Routing Number',
       explanation: 'A 9-digit number identifying your bank. Look at the very bottom-left of one of your paper checks. It is the first set of 9 numbers.',
       tip: 'It is always exactly 9 digits long.',
-      icon: '🏦'
+      icon: '🏦',
+      visualHint: 'check-routing'
     },
     {
       keywords: ['account number', 'checking account', 'savings account'],
       title: 'Your Bank Account Number',
       explanation: 'The number for your personal checking or savings account. On your paper check, it sits directly to the right of the 9-digit routing number.',
       tip: 'Usually 8 to 12 digits long.',
-      icon: '📄'
+      icon: '📄',
+      visualHint: 'check-account'
     },
     {
       keywords: ['billing zip', 'postal code', 'zip code', 'pincode', 'pin code'],
@@ -81,7 +84,8 @@ window.SilverExplainer = (function () {
       title: 'Insurance Member ID',
       explanation: 'The identification number printed clearly on the front of your health insurance or Medicare card.',
       tip: 'Do not confuse this with the Group Number, which identifies your overall employer or plan.',
-      icon: '🪪'
+      icon: '🪪',
+      visualHint: 'medicare'
     },
     {
       keywords: ['terms and conditions', 'privacy policy', 'disclaimer', 'consent'],
@@ -145,7 +149,8 @@ window.SilverExplainer = (function () {
             explanation: item.explanation,
             tip: item.tip,
             icon: item.icon,
-            matchedKeyword: kw
+            matchedKeyword: kw,
+            visualHint: item.visualHint || null
           };
         }
       }

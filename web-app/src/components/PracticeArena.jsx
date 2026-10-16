@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PRACTICE_FORMS } from '../data/mockForms';
-import { Volume2, Mic, MicOff, ArrowRight, ArrowLeft, Check, RotateCcw } from 'lucide-react';
+import CardVisualizer from './CardVisualizer';
+import { getSavedProfile } from './SavedProfile';
+import { Volume2, Mic, MicOff, ArrowRight, ArrowLeft, Check, RotateCcw, Printer, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function PracticeArena() {
@@ -9,17 +11,23 @@ export default function PracticeArena() {
   const [answers, setAnswers] = useState({});
   const [isListening, setIsListening] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [showVisualGuide, setShowVisualGuide] = useState(false);
+  const [savedData, setSavedData] = useState({});
 
   const activeForm = PRACTICE_FORMS.find(f => f.id === selectedFormId) || PRACTICE_FORMS[0];
   const totalSteps = activeForm.fields.length;
   const currentField = activeForm.fields[currentStep];
+
+  useEffect(() => {
+    setSavedData(getSavedProfile());
+  }, []);
 
   // Text-To-Speech helper
   const speakText = (text) => {
     if (!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.85; // Slower, clear pace for elderly users
+    utterance.rate = 0.85;
     window.speechSynthesis.speak(utterance);
   };
 
@@ -47,6 +55,7 @@ export default function PracticeArena() {
         const transcript = e.results[0][0].transcript;
         setAnswers(prev => ({ ...prev, [currentField.id]: transcript }));
         setIsListening(false);
+        speakText(`Got it: ${transcript}`);
       };
       recognition.onerror = () => setIsListening(false);
       recognition.onend = () => setIsListening(false);
@@ -57,6 +66,7 @@ export default function PracticeArena() {
   };
 
   const handleNext = () => {
+    setShowVisualGuide(false);
     if (currentStep < totalSteps - 1) {
       const nextIndex = currentStep + 1;
       setCurrentStep(nextIndex);
@@ -70,6 +80,7 @@ export default function PracticeArena() {
   };
 
   const handlePrev = () => {
+    setShowVisualGuide(false);
     if (currentStep > 0) {
       setCurrentStep(prev => prev - 1);
     }
@@ -79,8 +90,16 @@ export default function PracticeArena() {
     setSelectedFormId(id);
     setCurrentStep(0);
     setIsCompleted(false);
+    setShowVisualGuide(false);
     setAnswers({});
   };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // Check if we have a saved answer for this field
+  const savedValueForField = currentField.savedKey ? savedData[currentField.savedKey] : null;
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 space-y-6">
@@ -126,7 +145,7 @@ export default function PracticeArena() {
           <div className="flex items-center justify-between text-sm font-bold text-slate-600">
             <span>Question {currentStep + 1} of {totalSteps}</span>
             <button
-              onClick={() => { setCurrentStep(0); setIsCompleted(false); setAnswers({}); }}
+              onClick={() => { setCurrentStep(0); setIsCompleted(false); setAnswers({}); setShowVisualGuide(false); }}
               className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -153,7 +172,7 @@ export default function PracticeArena() {
             </div>
 
             {/* Simple Tip Box */}
-            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl space-y-1">
+            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl space-y-2">
               <div className="text-xs font-bold text-amber-900 uppercase tracking-wide">
                 What this means:
               </div>
@@ -161,11 +180,49 @@ export default function PracticeArena() {
                 {currentField.simpleHint}
               </p>
               {currentField.jargonTip && (
-                <p className="text-xs text-amber-800 pt-1">
+                <p className="text-xs text-amber-800 pt-0.5">
                   💡 {currentField.jargonTip}
                 </p>
               )}
+
+              {/* Visual Guide Toggle Button if applicable */}
+              {currentField.visualType && (
+                <div className="pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setShowVisualGuide(!showVisualGuide)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-200 hover:bg-amber-300 text-amber-950 font-bold text-xs rounded-lg transition"
+                  >
+                    <span>{showVisualGuide ? '✕ Hide card picture' : '🔍 Show me where this is on my card/check'}</span>
+                  </button>
+                </div>
+              )}
             </div>
+
+            {/* Visual Guide Display */}
+            {showVisualGuide && currentField.visualType && (
+              <CardVisualizer
+                type={currentField.visualType}
+                onClose={() => setShowVisualGuide(false)}
+              />
+            )}
+
+            {/* 1-Click Saved Auto-fill Suggestion */}
+            {savedValueForField && !answers[currentField.id] && (
+              <div className="bg-blue-50 border border-blue-200 p-3 rounded-xl flex items-center justify-between gap-3">
+                <div className="text-xs sm:text-sm text-blue-900">
+                  <span>Saved in your details: </span>
+                  <strong className="font-bold">"{savedValueForField}"</strong>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setAnswers(prev => ({ ...prev, [currentField.id]: savedValueForField }))}
+                  className="px-3 py-1.5 bg-blue-700 text-white font-bold text-xs rounded-lg hover:bg-blue-800 shrink-0"
+                >
+                  Use this answer
+                </button>
+              </div>
+            )}
 
             {/* Big, Clean Input */}
             <div className="space-y-2">
@@ -234,35 +291,50 @@ export default function PracticeArena() {
           </div>
         ) : (
           /* Success Screen */
-          <div className="text-center py-6 space-y-4">
+          <div className="text-center py-6 space-y-5">
             <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
               <Check className="w-9 h-9" />
             </div>
 
-            <h3 className="text-2xl font-bold text-slate-900">
-              All done! Great job!
-            </h3>
-            <p className="text-slate-600 text-sm max-w-md mx-auto">
-              You safely completed each question. With the SilverAssist browser extension, this same friendly helper will pop up right on real government and medical websites.
-            </p>
+            <div className="space-y-1">
+              <h3 className="text-2xl font-bold text-slate-900">
+                All done! Great job!
+              </h3>
+              <p className="text-slate-600 text-sm max-w-md mx-auto">
+                You safely completed each question. You can print a clean paper copy of your completed answers to take with you to the clinic or office.
+              </p>
+            </div>
 
-            {/* Summary */}
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-left max-w-md mx-auto space-y-2">
-              <div className="text-xs font-bold text-slate-500 uppercase">Your answers:</div>
+            {/* Summary Record */}
+            <div id="printable-record" className="bg-slate-50 border-2 border-slate-300 rounded-xl p-5 text-left max-w-lg mx-auto space-y-3">
+              <div className="border-b pb-2 flex justify-between items-center">
+                <span className="font-extrabold text-sm text-slate-800">{activeForm.title}</span>
+                <span className="text-xs text-slate-500">Record</span>
+              </div>
               {activeForm.fields.map(f => (
-                <div key={f.id} className="flex justify-between text-xs sm:text-sm border-b border-slate-200 py-1">
+                <div key={f.id} className="flex justify-between text-xs sm:text-sm border-b border-slate-200 py-1.5">
                   <span className="font-semibold text-slate-600">{f.label}:</span>
                   <span className="font-bold text-slate-900">{answers[f.id] || '(none)'}</span>
                 </div>
               ))}
             </div>
 
-            <button
-              onClick={() => { setCurrentStep(0); setIsCompleted(false); setAnswers({}); }}
-              className="px-6 py-3 bg-blue-700 text-white font-bold rounded-xl hover:bg-blue-800 text-sm"
-            >
-              Try Another Form
-            </button>
+            <div className="flex flex-wrap justify-center gap-3 pt-2">
+              <button
+                onClick={handlePrint}
+                className="flex items-center gap-2 px-5 py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl text-sm"
+              >
+                <Printer className="w-4 h-4" />
+                <span>Print or Save Paper Copy</span>
+              </button>
+
+              <button
+                onClick={() => { setCurrentStep(0); setIsCompleted(false); setAnswers({}); setShowVisualGuide(false); }}
+                className="px-5 py-3 bg-blue-700 text-white font-bold rounded-xl hover:bg-blue-800 text-sm"
+              >
+                Try Another Form
+              </button>
+            </div>
           </div>
         )}
 

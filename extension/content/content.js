@@ -492,11 +492,33 @@
     const explainerText = document.getElementById('silver-explainer-text');
 
     if (explanation) {
+      let visualHtml = '';
+      if (explanation.visualHint === 'card-cvv') {
+        visualHtml = `<div style="background: #1e293b; color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-top: 8px; font-family: sans-serif; display: flex; align-items: center; gap: 8px;">
+          <span>💳 Back of Card:</span>
+          <span style="background: #e2e8f0; color: #64748b; padding: 3px 8px; border-radius: 4px; font-size: 11px;">Signature Strip</span>
+          <span style="background: #facc15; color: #000; padding: 3px 8px; font-weight: 800; border-radius: 4px; font-family: monospace;">123 (CVV)</span>
+        </div>`;
+      } else if (explanation.visualHint === 'check-routing') {
+        visualHtml = `<div style="background: #ecfdf5; border: 2px solid #059669; color: #064e3b; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-top: 8px; font-family: monospace;">
+          📄 Bottom-left of check: ⑆ <span style="background: #facc15; color: #000; padding: 2px 6px; font-weight: 800; border-radius: 4px;">123456789 (9-digit Routing)</span> ⑆
+        </div>`;
+      } else if (explanation.visualHint === 'check-account') {
+        visualHtml = `<div style="background: #ecfdf5; border: 2px solid #059669; color: #064e3b; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-top: 8px; font-family: monospace;">
+          📄 Bottom of check: ⑆ 123456789 ⑆ <span style="background: #facc15; color: #000; padding: 2px 6px; font-weight: 800; border-radius: 4px;">9876543210 (Account Number)</span>
+        </div>`;
+      } else if (explanation.visualHint === 'medicare') {
+        visualHtml = `<div style="background: #eff6ff; border: 2px solid #2563eb; color: #1e3a8a; padding: 10px 14px; border-radius: 10px; font-size: 13px; margin-top: 8px; font-family: monospace;">
+          🪪 Medicare Card: Look under name -> <span style="background: #facc15; color: #000; padding: 2px 6px; font-weight: 800; border-radius: 4px;">1EG4-TE5-MK72 (ID)</span>
+        </div>`;
+      }
+
       explainerIcon.innerText = explanation.icon || '💡';
       explainerText.innerHTML = `
         <strong>${explanation.title}</strong>
         <div>${explanation.explanation}</div>
         ${explanation.tip ? `<div style="margin-top: 6px; font-weight: 600; color: #b45309;">💡 Helpful tip: ${explanation.tip}</div>` : ''}
+        ${visualHtml}
       `;
     } else {
       explainerIcon.innerText = '📝';
@@ -659,6 +681,7 @@
           input.value = transcript;
           input.dispatchEvent(new Event('input', { bubbles: true }));
         }
+        speakText(`Got it: ${transcript}`);
       };
 
       recognition.onerror = () => {

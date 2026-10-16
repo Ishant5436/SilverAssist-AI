@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import PracticeArena from './components/PracticeArena';
 import JargonGlossary from './components/JargonGlossary';
+import SavedProfile from './components/SavedProfile';
 import ExtensionGuide from './components/ExtensionGuide';
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
       <main className="flex-1 pb-16">
         {activeTab === 'arena' && <PracticeArena />}
         {activeTab === 'glossary' && <JargonGlossary />}
+        {activeTab === 'profile' && <SavedProfile />}
         {activeTab === 'guide' && <ExtensionGuide />}
       </main>
 
@@ -57,7 +59,7 @@ export default function App() {
             </p>
           </div>
           <div className="text-xs text-slate-400">
-            Open Source • Free to Use
+            Open Source • 100% Private On-Device
           </div>
         </div>
       </footer>
